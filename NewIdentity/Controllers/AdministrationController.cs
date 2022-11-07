@@ -154,8 +154,31 @@ namespace NewIdentity.Controllers
             }
             for (int i=0; i<model.Count; i++)
             {
+                var user = await userManager.FindByIdAsync(model[i].UserId);
+                IdentityResult result = null;
+                if(model[i].IsSelected && !(await userManager.IsInRoleAsync(user , role.Name)))
+                {
+                  result = await userManager.AddToRoleAsync(user, role.Name); 
+                }
+                else if(! model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
 
+                }
+                else
+                {
+                    continue;
+                }
+                if (result.Succeeded)
+                {
+                    if (i < (model.Count - 1))
+                        continue;
+                    else
+                        return RedirectToAction("EditRole", new {Id=roleId});
+                }
             }
+
+            return RedirectToAction("EditRole", new { Id = roleId });
         }
     }
 }
