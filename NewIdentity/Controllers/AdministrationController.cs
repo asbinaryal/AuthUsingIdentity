@@ -18,6 +18,39 @@ namespace NewIdentity.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var users = await userManager.FindByIdAsync(id);
+            if(users==null)
+            {
+                ViewBag.ErrorMessage = $"user with ID={id} cannot be found";
+            return View("NotFound");
+            }
+            var userClaims = await userManager.GetClaimsAsync(users);
+            var userRoles = await userManager.GetRolesAsync(users);
+
+            var model = new EditUserViewModel
+            {
+                Id=users.Id,
+                Email=users.Email,
+                UserName=users.UserName,
+                City=users.City,
+                Claims= userClaims.Select(c=>c.Value).ToList(),
+                Roles=userRoles
+            };
+            return View(model);
+
+        }
+
         [HttpGet]
         public IActionResult CreateRole()
         {
