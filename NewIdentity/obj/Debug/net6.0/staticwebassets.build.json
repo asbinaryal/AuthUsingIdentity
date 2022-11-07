@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "j6PSn17wYk6BctTJ0s0K2KVZbvamZnOB61iKvpvsIq8=",
+  "Hash": "2+ld9HxTk4qZy9jVpCUvByuuhgMAtp/IJz93yptIYvs=",
   "Source": "NewIdentity",
   "BasePath": "_content/NewIdentity",
   "Mode": "Default",
@@ -83,6 +83,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\LENOVO\\source\\repos\\NewIdentity\\NewIdentity\\wwwroot\\Images\\NoPermission.JPG",
+      "SourceId": "NewIdentity",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\LENOVO\\source\\repos\\NewIdentity\\NewIdentity\\wwwroot\\",
+      "BasePath": "_content/NewIdentity",
+      "RelativePath": "Images/NoPermission.JPG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\NoPermission.JPG"
     },
     {
       "Identity": "C:\\Users\\LENOVO\\source\\repos\\NewIdentity\\NewIdentity\\wwwroot\\js\\site.js",

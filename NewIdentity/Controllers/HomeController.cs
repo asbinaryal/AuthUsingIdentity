@@ -5,6 +5,7 @@ using System.Diagnostics;
 
 namespace NewIdentity.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -13,7 +14,6 @@ namespace NewIdentity.Controllers
         {
             _logger = logger;
         }
-        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();

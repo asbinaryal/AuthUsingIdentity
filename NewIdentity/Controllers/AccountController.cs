@@ -6,6 +6,7 @@ using NewIdentity.ViewModels;
 
 namespace NewIdentity.Controllers
 {
+
     [Authorize]
     public class AccountController : Controller
     {
@@ -107,6 +108,12 @@ namespace NewIdentity.Controllers
             }
 
             return View(model);
+        }
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
         }
 
 

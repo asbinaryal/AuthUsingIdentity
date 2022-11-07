@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NewIdentity.Models;
 using NewIdentity.ViewModels;
 
 namespace NewIdentity.Controllers
 {
+    [Authorize(Roles = "Admin, User")]  //to access this user must have role of both admin or user
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
