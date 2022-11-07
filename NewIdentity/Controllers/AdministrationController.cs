@@ -18,6 +18,33 @@ namespace NewIdentity.Controllers
             this.roleManager = roleManager;
             this.userManager = userManager;
         }
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+               
+            if(user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+              
+            else
+            {
+              var result= await userManager.DeleteAsync(user);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUsers");
+            }
+        }
 
         [HttpGet]
         public IActionResult ListUsers()
@@ -50,6 +77,39 @@ namespace NewIdentity.Controllers
             return View(model);
 
         }
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            var users = await userManager.FindByIdAsync(model.Id);
+            if (users == null)
+            {
+                ViewBag.ErrorMessage = $"user with ID={model.Id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                users.Email = model.Email;
+                users.UserName = model.UserName;
+                users.City = model.City;
+
+                var result = await userManager.UpdateAsync(users);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
+        }
+
+
+
 
         [HttpGet]
         public IActionResult CreateRole()
