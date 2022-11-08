@@ -89,14 +89,14 @@ namespace NewIdentity.Controllers
         [HttpPost]
         [AllowAnonymous]
 
-        public async Task<IActionResult> Login(LoginViewModel model , string returnUrl)
+        public async Task<IActionResult> Login(LoginViewModel model , string? returnUrl)
         
         {
             if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(model.Email,model.Password,model.RememberMe,false);
 
-                if (result.Succeeded)
+                if (result.Succeeded)               //may be issue in this for login
                 {
                     if (!string.IsNullOrEmpty(returnUrl))
                     {
